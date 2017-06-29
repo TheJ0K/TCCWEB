@@ -31,8 +31,7 @@ public class IdeaCompany implements Serializable {
     private String imageCompanyIdea;
     private String titleCompanyIdea;
     private String descriptionCompanyIdea;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    
     @JoinColumn(name = "idcompany")
     private Company idCompany;
 
