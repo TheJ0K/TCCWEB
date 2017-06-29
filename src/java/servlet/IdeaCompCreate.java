@@ -8,8 +8,8 @@ package servlet;
 import DAL.DAL;
 import Model.Company;
 import Model.IdeaCompany;
+import Model.LegalPerson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,31 +37,36 @@ public class IdeaCompCreate extends HttpServlet {
             String imageC = (String) request.getParameter("imageCreateC");
             String titleC = (String) request.getParameter("titleCreateC");
             String descriptionC = (String) request.getParameter("descriptionCreateC");
-            
+
             if (imageC.equals("") || titleC.equals("") || descriptionC.equals("")) {
 
             } else {
-            DAL dal = new DAL();
-            
-            Company comp = new Company();
-            
-            IdeaCompany idea = new IdeaCompany();
-            
-            idea.setImageCompanyIdea(imageC);
-            idea.setTitleCompanyIdea(titleC);
-            idea.setDescriptionCompanyIdea(descriptionC);
-            idea.setIdCompany(comp);
-            idea.setCompany(comp);
+                DAL dal = new DAL();
 
-            dal.add(comp);
-            dal.add(idea);
+                LegalPerson legal = new LegalPerson();
+                legal = (LegalPerson) request.getSession().getAttribute("leg");
 
-            RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+                IdeaCompany idea = new IdeaCompany();
+
+                idea.setImageCompanyIdea(imageC);
+                idea.setTitleCompanyIdea(titleC);
+                idea.setDescriptionCompanyIdea(descriptionC);
+                idea.setCompany(legal.getCompany());
+
+                dal.add(idea);
+
+                RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+                rd.forward(request, response);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage() + "\n" + ex.getLocalizedMessage());
+
+            request.setAttribute("message", "Erro ao cadastrar usuário!");
+            request.setAttribute("css_class", "erro");
+
+            RequestDispatcher rd = request.getRequestDispatcher("confIdeaDeveloper.jsp");
             rd.forward(request, response);
-            } 
-            
-            
-        } catch (Exception e) {
         }
     }
 

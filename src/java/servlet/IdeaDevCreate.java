@@ -8,13 +8,14 @@ package servlet;
 import DAL.DAL;
 import Model.Developer;
 import Model.IdeaDeveloper;
+import Model.PhysicalPerson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,29 +35,42 @@ public class IdeaDevCreate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String imageD = (String) request.getParameter("imageCreateD");
-        String titleD = (String) request.getParameter("titleCreateD");
-        String descriptionD = (String) request.getParameter("descriptionCreateD");
+        System.out.println("AHHHHHHHHHHHHHHHH");
 
-        if (imageD.equals("") || titleD.equals("") || descriptionD.equals("")) {
+        try {
+            String imageD = (String) request.getParameter("imageCreateD");
+            String titleD = (String) request.getParameter("titleCreateD");
+            String descriptionD = (String) request.getParameter("descriptionCreateD");
 
-        } else {
-            DAL dal = new DAL();
-            
-            Developer dev = new Developer();
-            
-            IdeaDeveloper idea = new IdeaDeveloper();
-            
-            idea.setImageDeveloperIdea(imageD);
-            idea.setTitleDeveloperIdea(titleD);
-            idea.setDescriptionDeveloperIdea(descriptionD);
-            idea.setId(dev);
-            idea.setDeveloper(dev);
+            if (imageD.equals("") || titleD.equals("") || descriptionD.equals("")) {
+                System.out.println("TESTE");
+            } else {
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-            dal.add(dev);
-            dal.add(idea);
+                PhysicalPerson phys = new PhysicalPerson();
 
-            RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+                DAL dal = new DAL();
+
+                phys = (PhysicalPerson) request.getSession().getAttribute("phy");
+
+                IdeaDeveloper idea = new IdeaDeveloper();
+                idea.setImageDeveloperIdea(imageD);
+                idea.setTitleDeveloperIdea(titleD);
+                idea.setDescriptionDeveloperIdea(descriptionD);
+                idea.setDeveloper(phys.getDeveloper());
+
+                dal.add(idea);
+
+                RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+                rd.forward(request, response);
+            }
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex.getMessage() + "\n" + ex.getLocalizedMessage());
+
+            request.setAttribute("message", "Erro ao cadastrar usuário!");
+            request.setAttribute("css_class", "erro");
+
+            RequestDispatcher rd = request.getRequestDispatcher("confIdeaDeveloper.jsp");
             rd.forward(request, response);
         }
 

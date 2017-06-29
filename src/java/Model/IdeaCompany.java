@@ -8,7 +8,6 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,9 +30,10 @@ public class IdeaCompany implements Serializable {
     private String imageCompanyIdea;
     private String titleCompanyIdea;
     private String descriptionCompanyIdea;
-    
-    @JoinColumn(name = "idcompany")
-    private Company idCompany;
+
+    @ManyToOne
+    @JoinColumn(name = "company")
+    private Company company;
 
     public IdeaCompany() {
     }
@@ -44,23 +44,13 @@ public class IdeaCompany implements Serializable {
         this.descriptionCompanyIdea = descriptionCompanyIdea;
     }
 
-    public IdeaCompany(Long id_ideaCompany, String imageCompanyIdea, String titleCompanyIdea, String descriptionCompanyIdea, Company idCompany) {
+    public IdeaCompany(Long id_ideaCompany, String imageCompanyIdea, String titleCompanyIdea, String descriptionCompanyIdea, Company company) {
         this.id_ideaCompany = id_ideaCompany;
         this.imageCompanyIdea = imageCompanyIdea;
         this.titleCompanyIdea = titleCompanyIdea;
         this.descriptionCompanyIdea = descriptionCompanyIdea;
-        this.idCompany = idCompany;
+        this.company = company;
     }
-    
-    /*TALVEZ DE ERRO*/
-    public Company getCompany() {
-        return idCompany;
-    }
-
-    public void setCompany(Company company) {
-        this.idCompany = company;
-    }
-    /*TALVEZ DE ERRO*/
 
     public Long getId_ideaCompany() {
         return id_ideaCompany;
@@ -94,13 +84,12 @@ public class IdeaCompany implements Serializable {
         this.descriptionCompanyIdea = descriptionCompanyIdea;
     }
 
-    public Company getIdCompany() {
-        return idCompany;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setIdCompany(Company idCompany) {
-        this.idCompany = idCompany;
+    public void setCompany(Company company) {
+        this.company = company;
     }
-
 
 }

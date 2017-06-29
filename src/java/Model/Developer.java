@@ -26,8 +26,9 @@ public class Developer {
     @OneToOne
     @JoinColumn(name = "idpessoa")
     PhysicalPerson physicalPerson;
-    
-    @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER, targetEntity = IdeaDeveloper.class)
+
+    @OneToMany(mappedBy = "developer", fetch = FetchType.LAZY,
+            targetEntity = IdeaDeveloper.class, cascade = CascadeType.ALL)
     private List<IdeaDeveloper> ideadeve;
 
     public Developer() {
@@ -48,16 +49,6 @@ public class Developer {
     public void setIdeadeve(List<IdeaDeveloper> ideadeve) {
         this.ideadeve = ideadeve;
     }
-    
-    
-
-    public Long getIdDeveloper() {
-        return iddeveloper;
-    }
-
-    public void setIdDeveloper(Long developer) {
-        this.iddeveloper = developer;
-    }
 
     public Long getAge() {
         return age;
@@ -74,7 +65,6 @@ public class Developer {
     public void setPhysicalPerson(PhysicalPerson physicalPerson) {
         this.physicalPerson = physicalPerson;
     }
-    
 
     public Long getCpf() {
         return cpf;

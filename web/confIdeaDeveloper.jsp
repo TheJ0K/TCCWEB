@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Model.Developer"%>
+<%@page import="Model.PhysicalPerson"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +24,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body style="background-image: url(./images/business1.jpg); background-attachment: fixed;">
+    <body style="background-image: url(./images/business1.jpg); background-attachment: fixed;" ${dev.ideadev}>
         <nav class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
             <div class="container-fluid"><!--1-->
                 <!--"LOGO"-->
@@ -94,7 +96,7 @@
 
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="create"><!--ID OF CREATE, OPTION 1-->
-                    <form action="ideaDevCreate" method="GET"><!--FORM FOR SERVELET-->
+                    <form action="IdeaDevCreate" method="POST"><!--FORM FOR SERVELET-->
 
                         <center><!--FIELD FOR TITLE END DESCRIPTION-->
                             <div class="page-header-1415 text-title" style="margin-top: 5px;">DEVELOPER | 

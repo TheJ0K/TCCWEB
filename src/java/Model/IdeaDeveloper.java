@@ -8,7 +8,6 @@ package Model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +31,8 @@ public class IdeaDeveloper implements Serializable {
     private String titleDeveloperIdea;
     private String descriptionDeveloperIdea;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "iddeveloper")
+    @ManyToOne
+    @JoinColumn(name = "developer")
     private Developer developer;
 
     public IdeaDeveloper() {
@@ -91,14 +90,6 @@ public class IdeaDeveloper implements Serializable {
 
     public void setDescriptionDeveloperIdea(String descriptionDeveloperIdea) {
         this.descriptionDeveloperIdea = descriptionDeveloperIdea;
-    }
-
-    public Developer getId() {
-        return developer;
-    }
-
-    public void setId(Developer id) {
-        this.developer = id;
     }
 
 }

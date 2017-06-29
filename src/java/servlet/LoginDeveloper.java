@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginDeveloper extends HttpServlet {
 
+    public static Developer deve;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,41 +36,41 @@ public class LoginDeveloper extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            String email = request.getParameter("emailLogin");
+            String password = request.getParameter("passwordLogin");
 
-        String email = request.getParameter("emailLogin");
-        String password = request.getParameter("passwordLogin");
+            DAL dal = new DAL();
+            List<PhysicalPerson> phys = dal.getList("PhysicalPerson");
 
-        DAL dal = new DAL();
-        List<PhysicalPerson> phys = dal.getList("PhysicalPerson");
-        
-        for (PhysicalPerson phy : phys) {
-            System.out.println(phy);
-        }
-        
-        String page = "login.jsp";
-        
-        for (PhysicalPerson phy : phys) {
-            if (phy.getEmail().equals(email) && phy.getPassword().equals(password)) {
-                page = "mainDeveloper.jsp";
-                
-                HttpSession session = request.getSession();
-                session.setAttribute("phy", phy);
-                
-                break;
-            } else {
-                request.setAttribute("message", "<div class=\"alert alert-info alert-dismissable fade in\">\n"
-                        + "                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
-                        + "                <strong>Info!</strong> Complete all fields to log.\n"
-                        + "            </div>");
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
+            for (PhysicalPerson phy : phys) {
+                System.out.println(phy);
             }
 
-        }
-        
-        RequestDispatcher rd = request.getRequestDispatcher(page);
-        rd.forward(request, response);
+            String page = "login.jsp";
 
+            for (PhysicalPerson phy : phys) {
+                if (phy.getEmail().equals(email) && phy.getPassword().equals(password)) {
+                    page = "mainDeveloper.jsp";
+
+                    HttpSession session = request.getSession();
+                    session.setAttribute("phy", phy);
+                    break;
+                } else {
+                    request.setAttribute("message", "<div class=\"alert alert-info alert-dismissable fade in\">\n"
+                            + "                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
+                            + "                <strong>Info!</strong> Complete all fields to log.\n"
+                            + "            </div>");
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    rd.forward(request, response);
+                }
+            }
+
+            RequestDispatcher rd = request.getRequestDispatcher(page);
+            rd.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

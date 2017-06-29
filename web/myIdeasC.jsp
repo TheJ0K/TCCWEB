@@ -123,7 +123,7 @@
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
                     <a href=""><img src="<% out.print(post.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
                     <div class="text-body-area" style="color: white;">Company: <span>  </span></div><br><!--COMPANY NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span> <% out.print(post.getNumberCompanyStars()); %> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Stars: <span> </span></div><br>
                     <div class="text-body-area" style="color: white;">Likes: <span> <% out.print(post.getNumberCompanyStars()); %> </span></div><br>
                     <div class="text-body-area" style="color: white;">NotLikes: <span> <% out.print(post.getNumberCompanyStars()); %> </span></div><br>
                 </div>

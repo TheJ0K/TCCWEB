@@ -90,7 +90,7 @@
                 <img src="./images/business3.jpg" alt="business3" style="width:100%;">
             </div>          
         </div>
-        
+
         <div>
             <center><!--INFORMATIONS-->
                 <div class="col-md-12 well"><!--NEW IDEAS AREA-->
@@ -99,7 +99,7 @@
                 </div>
             </center>
         </div>
-        
+
         <div class="col-md-3"></div><!--COL SEPARATION-->
 
         <form action="IdeaDevoloper" method="SET"><!--FORM NEWS IDEA-->

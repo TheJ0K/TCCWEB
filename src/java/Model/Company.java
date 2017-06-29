@@ -28,8 +28,8 @@ public class Company implements Serializable {
     @JoinColumn(name = "idlegal")
     private LegalPerson legalPerson;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, targetEntity = IdeaCompany.class)
-    @JoinColumn(name = "ideacomp")
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY,
+            targetEntity = IdeaCompany.class, cascade = CascadeType.ALL)
     private List<IdeaCompany> ideacomp;
 
     public Company() {
@@ -42,7 +42,7 @@ public class Company implements Serializable {
     public void setLegalPerson(LegalPerson legalPerson) {
         this.legalPerson = legalPerson;
     }
-    
+
     /*PODE DAR ERRO*/
     public List<IdeaCompany> getIdeaCompany() {
         return ideacomp;
@@ -51,8 +51,8 @@ public class Company implements Serializable {
     public void setIdeaCompany(List<IdeaCompany> ideaCompany) {
         this.ideacomp = ideaCompany;
     }
-    /*PODE DAR ERRO*/
 
+    /*PODE DAR ERRO*/
 
     public String getNameCompany() {
         return nameCompany;

@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginCompany extends HttpServlet {
 
+    public static String name;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,8 +42,8 @@ public class LoginCompany extends HttpServlet {
 
         DAL dal = new DAL();
         List<LegalPerson> legs = dal.getList("LegalPerson");
-        
-         for (LegalPerson leg : legs) {
+
+        for (LegalPerson leg : legs) {
             System.out.println(leg);
         }
 
@@ -67,7 +69,7 @@ public class LoginCompany extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher(page);
         rd.forward(request, response);
-        
+
     }
 
     @Override
