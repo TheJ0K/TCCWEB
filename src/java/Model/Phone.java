@@ -6,8 +6,6 @@
 package Model;
 
 import javax.persistence.*;
-//import org.hibernate.annotations.Fetch;
-//import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -18,45 +16,60 @@ import javax.persistence.*;
 public class Phone {
 
     @Id
-    @GeneratedValue
-    int idPhone;
-    int landLine, mobile;
-
-    @OneToOne
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long idPhone;
+    private Long landLine, mobile;
+    
+    @OneToOne(mappedBy = "phone", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idlegal")
     private LegalPerson legalPerson;
+
+    @OneToOne(mappedBy = "phone", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idphysical")
+    private PhysicalPerson physicalPerson;
 
     public Phone() {
     }
 
-    public int getIdPhone() {
+    public Long getIdPhone() {
         return idPhone;
     }
 
-    public void setIdPhone(int idPhone) {
+    public void setIdPhone(Long idPhone) {
         this.idPhone = idPhone;
     }
 
-    public int getId() {
-        return idPhone;
-    }
-
-    public void setId(int idPhone) {
-        this.idPhone = idPhone;
-    }
-
-    public int getLandLine() {
+    public Long getLandLine() {
         return landLine;
     }
 
-    public void setLandLine(int landLine) {
+    public void setLandLine(Long landLine) {
         this.landLine = landLine;
     }
 
-    public int getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(Long mobile) {
         this.mobile = mobile;
     }
+
+    public PhysicalPerson getPhisycal() {
+        return physicalPerson;
+    }
+
+    public void setPhisycal(PhysicalPerson physicalPerson) {
+        this.physicalPerson = physicalPerson;
+    }
+
+    public LegalPerson getLegalPerson() {
+        return legalPerson;
+    }
+
+    public void setLegalPerson(LegalPerson legalPerson) {
+        this.legalPerson = legalPerson;
+    }
+
 }

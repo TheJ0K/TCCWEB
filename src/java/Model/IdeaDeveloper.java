@@ -5,34 +5,67 @@
  */
 package Model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author Diogo Fistarol
  */
-public class IdeaDeveloper {
-    private int id_ideaDeveloper;
+@Entity
+@Table
+public class IdeaDeveloper implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id_ideaDeveloper;
     private String imageDeveloperIdea;
     private String titleDeveloperIdea;
     private String descriptionDeveloperIdea;
-    
-    private Developer id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "iddeveloper")
+    private Developer developer;
 
     public IdeaDeveloper() {
     }
 
-    public IdeaDeveloper(int id_ideaDeveloper, String imageDeveloperIdea, String titleDeveloperIdea, String descriptionDeveloperIdea, Developer id) {
+    public IdeaDeveloper(Long id_ideaDeveloper, String imageDeveloperIdea, String titleDeveloperIdea, String descriptionDeveloperIdea, Developer developer) {
         this.id_ideaDeveloper = id_ideaDeveloper;
         this.imageDeveloperIdea = imageDeveloperIdea;
         this.titleDeveloperIdea = titleDeveloperIdea;
         this.descriptionDeveloperIdea = descriptionDeveloperIdea;
-        this.id = id;
+        this.developer = developer;
     }
 
-    public int getId_ideaDeveloper() {
+    public IdeaDeveloper(String imageDeveloperIdea, String titleDeveloperIdea, String descriptionDeveloperIdea) {
+        this.imageDeveloperIdea = imageDeveloperIdea;
+        this.titleDeveloperIdea = titleDeveloperIdea;
+        this.descriptionDeveloperIdea = descriptionDeveloperIdea;
+    }
+
+    public Developer getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
+
+    public Long getId_ideaDeveloper() {
         return id_ideaDeveloper;
     }
 
-    public void setId_ideaDeveloper(int id_ideaDeveloper) {
+    public void setId_ideaDeveloper(Long id_ideaDeveloper) {
         this.id_ideaDeveloper = id_ideaDeveloper;
     }
 
@@ -61,12 +94,11 @@ public class IdeaDeveloper {
     }
 
     public Developer getId() {
-        return id;
+        return developer;
     }
 
     public void setId(Developer id) {
-        this.id = id;
+        this.developer = id;
     }
-    
-    
+
 }

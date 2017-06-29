@@ -4,7 +4,7 @@
     Author     : Diogo Fistarol
 --%>
 <%@page import="Model.IdeaDeveloper"%>
-<%@page import="servelet.IdeaDev"%>
+<%@page import="servlet.IdeaDev"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

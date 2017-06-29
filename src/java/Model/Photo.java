@@ -6,8 +6,6 @@
 package Model;
 
 import javax.persistence.*;
-//import org.hibernate.annotations.Fetch;
-//import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -18,25 +16,43 @@ import javax.persistence.*;
 public class Photo {
 
     @Id
-    @GeneratedValue
-    int idPhoto;
-    String face, cover;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long idPhoto;
+    private String face, cover;
 
-    /*@OneToOne
-    private LegalPerson localPerson;*/
+    @OneToOne(mappedBy = "photo", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idphysical")
+    private PhysicalPerson physical;
+
+    @OneToOne(mappedBy = "photo", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idlegal")
+    private LegalPerson legalPerson;
+
+    public LegalPerson getLegalPerson() {
+        return legalPerson;
+    }
+
+    public void setLegalPerson(LegalPerson legalPerson) {
+        this.legalPerson = legalPerson;
+    }
+
     public Photo() {
     }
 
-    public Photo(String face, String cover) {
-        this.face = face;
-        this.cover = cover;
+    public PhysicalPerson getPhysical() {
+        return physical;
     }
 
-    public int getIdPhoto() {
+    public void setPhysical(PhysicalPerson physical) {
+        this.physical = physical;
+    }
+
+    public Long getIdPhoto() {
         return idPhoto;
     }
 
-    public void setIdPhoto(int idPhoto) {
+    public void setIdPhoto(Long idPhoto) {
         this.idPhoto = idPhoto;
     }
 

@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 /**
@@ -13,27 +14,24 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-public class Company {
+public class Company implements Serializable {
 
     @Id
-    @GeneratedValue
-    private int idCompany;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long idCompany;
     private String nameCompany;
-    private int cnpj;
+    private Long cnpj;
 
-    
-    @OneToOne(mappedBy = "company", fetch = FetchType.EAGER)
-    @JoinColumn(name="idCompany")
+    @OneToOne
+    @JoinColumn(name = "idlegal")
     private LegalPerson legalPerson;
 
-    public Company() {
-    }
+    @OneToMany
+    @JoinColumn(name = "idideacomp")
+    private IdeaCompany ideacomp;
 
-    public Company(int idCompany, String nameCompany, int cnpj, LegalPerson legalPerson) {
-        this.idCompany = idCompany;
-        this.nameCompany = nameCompany;
-        this.cnpj = cnpj;
-        this.legalPerson = legalPerson;
+    public Company() {
     }
 
     public LegalPerson getLegalPerson() {
@@ -43,14 +41,17 @@ public class Company {
     public void setLegalPerson(LegalPerson legalPerson) {
         this.legalPerson = legalPerson;
     }
-
-    public int getIdCompany() {
-        return idCompany;
+    
+    /*PODE DAR ERRO*/
+    public IdeaCompany getIdeaCompany() {
+        return ideacomp;
     }
 
-    public void setIdCompany(int idCompany) {
-        this.idCompany = idCompany;
+    public void setIdeaCompany(IdeaCompany ideaCompany) {
+        this.ideacomp = ideaCompany;
     }
+    /*PODE DAR ERRO*/
+
 
     public String getNameCompany() {
         return nameCompany;
@@ -60,11 +61,20 @@ public class Company {
         this.nameCompany = nameCompany;
     }
 
-    public int getCnpj() {
+    public Long getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(Long idCompany) {
+        this.idCompany = idCompany;
+    }
+
+    public Long getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(Long cnpj) {
         this.cnpj = cnpj;
     }
+
 }

@@ -13,33 +13,11 @@ import javax.persistence.*;
  * @author tiago
  */
 @MappedSuperclass
-public class Person implements Serializable{
+public class Person implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int idPessoa;
     private String name, lastName, email, password, description;
 
-    /*@OneToOne(mappedBy = "legalPerson"/*, fetch = FetchType.EAGER)
-    @JoinColumn(name = "legalPerson")
-    private Phone phone;
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Phone phone) {
-        this.phone = phone;
-    }*/
     public Person() {
-    }
-
-    public Person(String name, String lastName, String email, String password, String description) {
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.description = description;
     }
 
     public String getName() {
@@ -81,4 +59,5 @@ public class Person implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

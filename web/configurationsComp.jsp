@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Model.Company"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -94,7 +96,7 @@
 
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="change">
-                    <form action="RegisterCompany" method="GET">
+                    <form action="ChangeCompany" method="GET">
                         <center>
                             <div class="page-header-1415 text-title" style="margin-top: 5px;">COMPANY | 
                                 <small>Your Account</small> 
@@ -108,37 +110,37 @@
 
                         <div><!--NEW IMAGE-->
                             <div class="col-md-12 form-group"><!--C = CREATE or COMPANY-->
-                                <label for="inputImageC">Face Image</label>
-                                <input type="file" class="form-control" placeholder="" name="imageChangeC">
+                                <label for="inputImageC1">Face Image</label>
+                                <input type="file" class="form-control" placeholder="" name="imageFChangeC">
                             </div>
                         </div>
 
                         <div><!--NEW IMAGE-->
                             <div class="col-md-12 form-group"><!--C = CREATE or COMPANY-->
-                                <label for="inputImageC">Cover Image</label>
-                                <input type="file" class="form-control" placeholder="" name="imageChangeC">
+                                <label for="inputImageC2">Cover Image</label>
+                                <input type="file" class="form-control" placeholder="" name="imageCChangeC">
                             </div>
                         </div>
 
                         <div><!--COMPANY-->
                             <div class="col-md-6 form-group ">
                                 <label for="inputNameC">New Name</label>
-                                <input type="text" class="form-control" placeholder="your name..." name="nameChangeC">
+                                <input type="text" class="form-control" value="${leg.name}" name="nameChangeC">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="inputLastnameC">New Lastname</label>
-                                <input type="text" class="form-control" placeholder="your lastname..." name="lastnameChangeC">
+                                <input type="text" class="form-control" value="${leg.lastName}" name="lastnameChangeC">
                             </div>
                         </div>
 
                         <div><!--COMPANY-->
                             <div class="col-md-6 form-group">
                                 <label for="inputNameCompanyC">Name Company</label>
-                                <input type="text" class="form-control" placeholder="name company..." name="nameCompanyChangeC">
+                                <input type="text" class="form-control" value="${leg.nameCompany}" name="nameCompanyChangeC">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="inputCnpjC">CNPJ</label>
-                                <input type="number" class="form-control" placeholder="cnpj company..." name="cnpjRegisterC">
+                                <input type="number" class="form-control" value="${leg.cnpj}" name="cnpjChangeC">
                             </div>
                         </div>
 
@@ -156,22 +158,29 @@
                         <div><!--STATE-->
                             <div class="col-md-6 form-group">
                                 <label for="inputStateC">New State</label>
-                                <input type="text" class="form-control" placeholder="your state..." name="stateChangeC">
+                                <input type="text" class="form-control" value="${leg.nameState}" name="stateChangeC">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="inputCityC">New City</label>
-                                <input type="text" class="form-control" placeholder="your city..." name="cityChangeC">
+                                <input type="text" class="form-control" value="${leg.nameCity}" name="cityChangeC">
                             </div>
                         </div>
 
                         <div><!--PHONE-->
                             <div class="col-md-6 form-group">
                                 <label for="inputLandlineC">New Landline</label>
-                                <input type="number" class="form-control" placeholder="your landline phone..." name="landlineChangeC">
+                                <input type="number" class="form-control" value="${leg.landLine}" name="landlineChangeC">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="inputMobileC">New Mobile</label>
-                                <input type="number" class="form-control" placeholder="your mobile phone..." name="mobileChangeC">
+                                <input type="number" class="form-control" value="${leg.mobile}" name="mobileChangeC">
+                            </div>
+                        </div>
+                        
+                        <div><!--TEXT DESCRIPTION AREA-->
+                            <div class="col-md-12 form-group">
+                                <label for="inputTitle">Description</label>
+                                <textarea class="form-control" name="descriptionRegisterD" style="height: 200px;"> </textarea>
                             </div>
                         </div>
 
@@ -180,14 +189,14 @@
                         <div><!--PASSWORD'S-->
                             <div class="col-md-6 form-group">
                                 <label for="inputPasswordC">Your Password</label>
-                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordChangeC">
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordC">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="inputConfirmPasswordC">Password Confirm</label>
-                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordConfirmChangeC">
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordConfirmC">
                             </div>
                         </div><br>
-
+                        
 
                         <div><!--BUTTON-->
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Change</button>
@@ -196,46 +205,86 @@
                     </form>
                 </div>
 
-            </div>
-
-            <div class="tab-pane active in" id="pdf">
-                <form action="PDFCompany" method="GET">
-                    <center>
-                        <div class="page-header-1415 text-title" style="margin-top: 5px;">COMPANY | 
-                            <small>Delete Your Account</small> 
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: right;"></span>
+                <div class="tab-pane fade" id="delete">
+                    <form action="DeleteCompany" method="GET">
+                        <center>
+                            <div class="page-header-1415 text-title" style="margin-top: 5px;">COMPANY | 
+                                <small>Delete Your Account</small> 
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: right;"></span>
+                            </div>
+                        </center>
+                        <div class="alert alert-info alert-dismissable fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Info!</strong> Complete all fields to create a PDF.
                         </div>
-                    </center>
-                    <div class="alert alert-info alert-dismissable fade in">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Info!</strong> Complete all fields to create a PDF.
-                    </div>
 
-                    <div><!--EMAIL-->
-                        <div class="col-md-12 form-group">
-                            <label for="inputEmailC">Email</label>
-                            <input type="email" class="form-control" placeholder="exemple@email.com" name="emailPDFC">
+                        <div><!--EMAIL-->
+                            <div class="col-md-12 form-group">
+                                <label for="inputEmailC">Email</label>
+                                <input type="email" class="form-control" value="${leg.email}" name="emailPDFC">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-12 page-header-1415"></div>
+                        <div class="col-md-12 page-header-1415"></div>
 
-                    <div><!--PASSWORD'S-->
-                        <div class="col-md-6 form-group">
-                            <label for="inputPasswordC">Your Password</label>
-                            <input type="password" class="form-control" placeholder="•••••••••" name="passwordPDFC">
+                        <div><!--PASSWORD'S-->
+                            <div class="col-md-6 form-group">
+                                <label for="inputPasswordC">Your Password</label>
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordPDFC">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="inputConfirmPasswordC">Password Confirm</label>
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordConfirmPDFC">
+                            </div>
+                        </div><br>
+
+                        <div><!--BUTTON-->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                        </div>	
+
+                    </form>
+                </div>
+                
+                <div class="tab-pane fade" id="pdf">
+                    <form action="PDFCompany" method="GET">
+                        <center>
+                            <div class="page-header-1415 text-title" style="margin-top: 5px;">COMPANY | 
+                                <small>Delete Your Account</small> 
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: right;"></span>
+                            </div>
+                        </center>
+                        <div class="alert alert-info alert-dismissable fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Info!</strong> Complete all fields to create a PDF.
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label for="inputConfirmPasswordC">Password Confirm</label>
-                            <input type="password" class="form-control" placeholder="•••••••••" name="passwordConfirmPDFC">
+
+                        <div><!--EMAIL-->
+                            <div class="col-md-12 form-group">
+                                <label for="inputEmailC">Email</label>
+                                <input type="email" class="form-control" value="${leg.email}" name="emailPDFC">
+                            </div>
                         </div>
-                    </div><br>
 
-                    <div><!--BUTTON-->
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Delete</button>
-                    </div>	
+                        <div class="col-md-12 page-header-1415"></div>
 
-                </form>
+                        <div><!--PASSWORD'S-->
+                            <div class="col-md-6 form-group">
+                                <label for="inputPasswordC">Your Password</label>
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordPDFC">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="inputConfirmPasswordC">Password Confirm</label>
+                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordConfirmPDFC">
+                            </div>
+                        </div><br>
+
+                        <div><!--BUTTON-->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                        </div>	
+
+                    </form>
+                </div>
+                
             </div>
 
         </div>

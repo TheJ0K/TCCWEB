@@ -5,7 +5,6 @@
  */
 package Model;
 
-import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -17,37 +16,71 @@ import javax.persistence.*;
 public class Developer {
 
     @Id
-    @GeneratedValue
-    private int id;
-    private Date age;
-    private int cpf;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long iddeveloper;
+    private Long age;
+    private Long cpf;
 
     @OneToOne
+    @JoinColumn(name = "idpessoa")
     PhysicalPerson physicalPerson;
+    
+    @OneToMany
+    @JoinColumn(name = "ididea")
+    IdeaDeveloper ideadeve;
 
     public Developer() {
     }
 
-    public Developer(int id, Date age, int cpf, PhysicalPerson physicalPerson) {
-        this.id = id;
-        this.age = age;
-        this.cpf = cpf;
-        this.physicalPerson = physicalPerson;
+    public Long getIddeveloper() {
+        return iddeveloper;
     }
 
-    public Date getAge() {
+    public void setIddeveloper(Long iddeveloper) {
+        this.iddeveloper = iddeveloper;
+    }
+
+    public IdeaDeveloper getIdeadeve() {
+        return ideadeve;
+    }
+
+    public void setIdeadeve(IdeaDeveloper ideadeve) {
+        this.ideadeve = ideadeve;
+    }
+    
+    
+
+    public Long getIdDeveloper() {
+        return iddeveloper;
+    }
+
+    public void setIdDeveloper(Long developer) {
+        this.iddeveloper = developer;
+    }
+
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(Date age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
-    public int getCpf() {
+    public PhysicalPerson getPhysicalPerson() {
+        return physicalPerson;
+    }
+
+    public void setPhysicalPerson(PhysicalPerson physicalPerson) {
+        this.physicalPerson = physicalPerson;
+    }
+    
+
+    public Long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
 }

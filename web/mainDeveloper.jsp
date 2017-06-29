@@ -5,8 +5,14 @@
 --%>
 <%@page import="Model.IdeaCompany"%>
 <%@page import="Model.IdeaDeveloper"%>
-<%@page import="servelet.IdeaDev"%>
-<%@page import="servelet.IdeaComp"%>
+
+<%@page import="Model.Company"%>
+<%@page import="Model.Developer"%>
+
+<%@page import="servlet.LoginDeveloper"%>
+
+<%@page import="servlet.IdeaDev"%>
+<%@page import="servlet.IdeaComp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,17 +47,6 @@
                 </div><!--2-->
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><!--3-->
-
-                    <!--
-                    <center> SEARCH
-                        <div class="navbar-form navbar-left form-group input-group-btn">
-                            <input type="text" style="border-radius: 0px;" class="form-control input-group" placeholder="Search">
-                            <button type="submit" class="expand btn-group btn btn-info active">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </center>
-                    -->
 
                     <ul class="nav navbar-nav"><!--MORE FUNCTIONS-->
                         <li class="active"><a href="mainDeveloper.jsp">NEWS</a></li>
@@ -147,18 +142,24 @@
                 </a>
             </div> <br>
         </div>
+        <div>
+            <center>
+                <span style="color: white;">WELLCOME: ${phy.name} ${phy.lastName}</span>
+            </center>
+        </div><br>
+
+        <div>    <!-- NEW -->
+            <center><!--INFORMATIONS-->
+                <div class="col-md-12 well" style="border-radius: 0;"><!--NEW IDEAS AREA-->
+                    <div class="col-md-4"></div>
+                    <span class="col-md-4 text-title-text" style="background-color: #0A0A0A;"> IDEAS </span>
+                </div>
+            </center>
+        </div>
+
+        <div class="col-md-1"></div><!--COL SEPARATION-->
 
         <!-- NEW -->
-    <center><!--INFORMATIONS-->
-        <div class="col-md-12 well" style="border-radius: 0;"><!--NEW IDEAS AREA-->
-            <div class="col-md-4"></div>
-            <span class="col-md-4 text-title-text" style="background-color: #0A0A0A;"> IDEAS </span>
-        </div>
-    </center>
-
-    <div class="col-md-1"></div><!--COL SEPARATION-->
-
-    <!-- NEW -->
     <center><!--TITLES-->
         <div class="col-md-5 text-title" style="color: white;">Ideas Devolopers</div>
         <div class="col-md-5 text-title" style="color: white;">Ideas Company</div>
@@ -173,8 +174,7 @@
         <form action="IdeaDevoloper" method="SET"><!--FORM NEWS IDEA-->
 
             <div class="col-md-5 well" style="border-color: transparent;"><!--NEWS AREA DEVOLOPER 'BLACK'-->    
-                <%
-                    IdeaDev cria = new IdeaDev();
+                <%                    IdeaDev cria = new IdeaDev();
                     for (IdeaDeveloper post : cria.getIdeaDevelopers()) {
                 %>
 
@@ -182,17 +182,24 @@
 
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
-                    <a href=""><img src="<% out.print(post.getImageDeveloperIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
-                    <div class="text-body-area" style="color: white;">Developer:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span>  </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span>  </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span>  </span></div><br>
-
+                    <center>
+                        <a href=""><img src="" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                    </center>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Name:<span>  </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Lastname: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Age: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Email: <span>  </span></div><br>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Landline Phone:<span>  </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Mobile Phone: <span>  </span></div><br>
+                    </div>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
                     <center>
-                        <h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(post.getTitleDeveloperIdea()); %></h1>
+                        <h1 class="text-title-area" style="color: #0A0A0A;"></h1>
                     </center>
                 </div>
 
@@ -203,14 +210,7 @@
                     </div>
 
                 </div>
-
-                <div class="page-header-black"><!--BUTTONS-->
-                    <center>
-                        <button type="submit" class="btn btn-success glyphicon glyphicon-thumbs-up shadow" name="submitUp"></button>
-                        <button type="submit" class="btn btn-danger glyphicon glyphicon-thumbs-down shadow" name="submitDown"></button>
-                        <button type="submit" class="btn btn-warning glyphicon glyphicon-star-empty shadow" name="submitStar"></button>
-                    </center>
-                </div><br>
+                <br>
                 <%
                     }
                 %>        
@@ -230,11 +230,19 @@
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #0A0A0A; color: white;"> New Company Idea! </div>
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
-                    <a href=""><img src="<% out.print(post.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
-                    <div class="text-body-area" style="color: white;">Company: <span>  </span></div><br><!--COMPANY NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span>  </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span>  </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span>  </span></div><br>
+                    <center>
+                        <a href=""><img src="<% out.print(post.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                    </center>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Name:<span>  </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Lastname: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Age: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Email: <span>  </span></div><br>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Landline Phone:<span>  </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Mobile Phone: <span>  </span></div><br>
+                    </div>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
@@ -247,14 +255,7 @@
                         <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(post.getDescriptionCompanyIdea()); %></textarea>
                     </div>
                 </div>
-
-                <div class="page-header-black"><!--BUTTONS-->
-                    <center>
-                        <button type="submit" class="btn btn-success glyphicon glyphicon-thumbs-up shadow" name="submitUp"></button>
-                        <button type="submit" class="btn btn-danger glyphicon glyphicon-thumbs-down shadow" name="submitDown"></button>
-                        <button type="submit" class="btn btn-warning glyphicon glyphicon-star-empty shadow" name="submitStar"></button>
-                    </center>
-                </div><br>
+                <br>
                 <%
                     }
                 %>  
@@ -265,5 +266,6 @@
         <div class="col-md-1"></div><!--COL SEPARATION-->
     </div>
     <div class="col-md-12"></div><!--COL SEPARATION-->
+
 </body>
 </html>

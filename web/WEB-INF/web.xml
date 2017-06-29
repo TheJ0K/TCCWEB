@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>RegisterDevoloper</servlet-name>
-        <servlet-class>servelet.RegisterDeveloper</servlet-class>
+        <servlet-name>RegisterDeveloper</servlet-name>
+        <servlet-class>servlet.RegisterDeveloper</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterCompany</servlet-name>
-        <servlet-class>servelet.RegisterCompany</servlet-class>
+        <servlet-class>servlet.RegisterCompany</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaDeveloper</servlet-name>
-        <servlet-class>servelet.IdeaDev</servlet-class>
+        <servlet-class>servlet.IdeaDev</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaCompany</servlet-name>
-        <servlet-class>servelet.IdeaComp</servlet-class>
+        <servlet-class>servlet.IdeaComp</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginCompany</servlet-name>
-        <servlet-class>servelet.LoginCompany</servlet-class>
+        <servlet-class>servlet.LoginCompany</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginDeveloper</servlet-name>
-        <servlet-class>servelet.LoginDeveloper</servlet-class>
+        <servlet-class>servlet.LoginDeveloper</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaCompCreate</servlet-name>
-        <servlet-class>servelet.IdeaCompCreate</servlet-class>
+        <servlet-class>servlet.IdeaCompCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaDevCreate</servlet-name>
-        <servlet-class>servelet.IdeaDevCreate</servlet-class>
+        <servlet-class>servlet.IdeaDevCreate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaCompDelete</servlet-name>
-        <servlet-class>servelet.IdeaCompDelete</servlet-class>
+        <servlet-class>servlet.IdeaCompDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaCompChange</servlet-name>
-        <servlet-class>servelet.IdeaCompChanges</servlet-class>
+        <servlet-class>servlet.IdeaCompChanges</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaDevChange</servlet-name>
-        <servlet-class>servelet.IdeaDevChanges</servlet-class>
+        <servlet-class>servlet.IdeaDevChanges</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>IdeaDevDelete</servlet-name>
-        <servlet-class>servelet.IdeaDevDelete</servlet-class>
+        <servlet-class>servlet.IdeaDevDelete</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteCompany</servlet-name>
-        <servlet-class>servelet.DeleteCompany</servlet-class>
+        <servlet-class>servlet.DeleteCompany</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteDeveloper</servlet-name>
-        <servlet-class>servelet.DeleteDeveloper</servlet-class>
+        <servlet-class>servlet.DeleteDeveloper</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangeCompany</servlet-name>
-        <servlet-class>servelet.ChangeCompany</servlet-class>
+        <servlet-class>servlet.ChangeCompany</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangeDeveloper</servlet-name>
-        <servlet-class>servelet.ChangeDeveloper</servlet-class>
+        <servlet-class>servlet.ChangeDeveloper</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountCompany</servlet-name>
-        <servlet-class>servelet.AccountCompany</servlet-class>
+        <servlet-class>servlet.AccountCompany</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AccountDeveloper</servlet-name>
-        <servlet-class>servelet.AccountDeveloper</servlet-class>
+        <servlet-class>servlet.AccountDeveloper</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegisterDevoloper</servlet-name>
-        <url-pattern>/RegisterDevoloper</url-pattern>
+        <servlet-name>RegisterDeveloper</servlet-name>
+        <url-pattern>/RegisterDeveloper</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterCompany</servlet-name>

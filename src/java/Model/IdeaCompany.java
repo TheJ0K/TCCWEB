@@ -5,34 +5,69 @@
  */
 package Model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author Diogo Fistarol
  */
-public class IdeaCompany {
-    private int id_ideaCompany;
+@Entity
+@Table
+public class IdeaCompany implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id_ideaCompany;
     private String imageCompanyIdea;
     private String titleCompanyIdea;
     private String descriptionCompanyIdea;
-    
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idcompany")
     private Company idCompany;
 
     public IdeaCompany() {
     }
 
-    public IdeaCompany(int id_ideaCompany, String imageCompanyIdea, String titleCompanyIdea, String descriptionCompanyIdea, Company idCompany) {
+    public IdeaCompany(String imageCompanyIdea, String titleCompanyIdea, String descriptionCompanyIdea) {
+        this.imageCompanyIdea = imageCompanyIdea;
+        this.titleCompanyIdea = titleCompanyIdea;
+        this.descriptionCompanyIdea = descriptionCompanyIdea;
+    }
+
+    public IdeaCompany(Long id_ideaCompany, String imageCompanyIdea, String titleCompanyIdea, String descriptionCompanyIdea, Company idCompany) {
         this.id_ideaCompany = id_ideaCompany;
         this.imageCompanyIdea = imageCompanyIdea;
         this.titleCompanyIdea = titleCompanyIdea;
         this.descriptionCompanyIdea = descriptionCompanyIdea;
         this.idCompany = idCompany;
     }
+    
+    /*TALVEZ DE ERRO*/
+    public Company getCompany() {
+        return idCompany;
+    }
 
-    public int getId_ideaCompany() {
+    public void setCompany(Company company) {
+        this.idCompany = company;
+    }
+    /*TALVEZ DE ERRO*/
+
+    public Long getId_ideaCompany() {
         return id_ideaCompany;
     }
 
-    public void setId_ideaCompany(int id_ideaCompany) {
+    public void setId_ideaCompany(Long id_ideaCompany) {
         this.id_ideaCompany = id_ideaCompany;
     }
 
@@ -67,6 +102,6 @@ public class IdeaCompany {
     public void setIdCompany(Company idCompany) {
         this.idCompany = idCompany;
     }
-    
-    
+
+
 }

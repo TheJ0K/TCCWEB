@@ -92,10 +92,11 @@
                 <li><a href="#changes" data-toggle="tab">Changes Idea</a></li><!--OPTION 2-->
                 <li><a href="#delete" data-toggle="tab">Delete Idea</a></li><!--OPTION 2-->
             </ul>
-
+            <!--CREATE-->
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active in" id="create"><!--ID OF CREATE, OPTION 1-->
-                    <form action="ideaCompCreate" method="GET"><!--FORM FOR SERVELET-->
+                    
+                    <form action="ideaCompCreate" method="GET"><!--FORM FOR SERVELET 'CREATE'-->
 
                         <center><!--FIELD FOR TITLE END DESCRIPTION-->
                             <div class="page-header-1415 text-title" style="margin-top: 5px;">COMPANY | 

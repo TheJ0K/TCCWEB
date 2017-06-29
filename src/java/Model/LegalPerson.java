@@ -6,8 +6,6 @@
 package Model;
 
 import javax.persistence.*;
-//import org.hibernate.annotations.FetchMode;
-//import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -17,32 +15,28 @@ import javax.persistence.*;
 @Table
 public class LegalPerson extends Person {
 
-    /*@OneToOne(mappedBy = "legalPerson", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "idPessoa")
-    private Phone phone;*/
-    @OneToOne(mappedBy = "legalPerson", fetch = FetchType.EAGER)
-    @JoinColumn(name = "idPhone")
-    private Phone phone;
-    
-    @OneToOne
-    @JoinColumn(name="idPessoa")
-    private Company idcompany;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long idlegal;
 
-    /*@OneToOne(mappedBy = "legalPerson", fetch = FetchType.EAGER)
-    @JoinColumn(name = "legalPerson")
+    @OneToOne(mappedBy = "legalPerson", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idcompany")
+    private Company company;
+
+    @OneToOne
+    @JoinColumn(name = "idstate")
+    private State state;
+
+    @OneToOne
+    @JoinColumn(name = "idphone")
+    private Phone phone;
+
+    @OneToOne
+    @JoinColumn(name = "idphoto")
     private Photo photo;
 
-    @OneToOne(mappedBy = "legalPerson", fetch = FetchType.EAGER)
-    @JoinColumn(name = "legalPerson")
-    private State state;*/
-
- /*public Photo getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
+    public LegalPerson() {
     }
 
     public State getState() {
@@ -51,7 +45,8 @@ public class LegalPerson extends Person {
 
     public void setState(State state) {
         this.state = state;
-    }*/
+    }
+
     public Phone getPhone() {
         return phone;
     }
@@ -60,7 +55,28 @@ public class LegalPerson extends Person {
         this.phone = phone;
     }
 
-    public LegalPerson() {
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Long getIdlegal() {
+        return idlegal;
+    }
+
+    public void setIdlegal(Long idlegal) {
+        this.idlegal = idlegal;
     }
 
 }

@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="Model.IdeaCompany"%>
-<%@page import="servelet.IdeaComp"%>
+<%@page import="servlet.IdeaComp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

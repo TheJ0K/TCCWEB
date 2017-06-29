@@ -16,12 +16,15 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    @GeneratedValue
-    int idCity;
-    String nameCity;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long idCity;
+    private String nameCity;
 
-    /*@OneToOne
-    private State state;*/
+    @OneToOne(mappedBy = "city", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idstate")
+    private State state;
+
     public String getNameCity() {
         return nameCity;
     }

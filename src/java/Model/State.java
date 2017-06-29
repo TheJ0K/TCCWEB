@@ -5,35 +5,62 @@
  */
 package Model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-//import org.hibernate.annotations.Fetch;
-//import org.hibernate.annotations.FetchMode;
+import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author tiago
  */
 @Entity
-@Table
-public class State {
+@Table(name = "states")
+public class State implements Serializable {
 
     @Id
-    @GeneratedValue
-    int idState;
-    String nameState;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private int idState;
+    private String nameState;
 
-    /*@OneToOne
-    @JoinColumn(name="idCity")
-    private City city;*/
+    @OneToOne(mappedBy = "state", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idphysical")
+    private PhysicalPerson physical;
 
- /*@OneToOne
-    private LegalPerson legaPerson;*/
+    @OneToOne(mappedBy = "state", fetch = FetchType.EAGER)
+    @JoinColumn(name = "idlegal")
+    private LegalPerson legalPerson;
+
+    @OneToOne
+    @JoinColumn(name = "idcity")
+    private City city;
+
+    public State() {
+    }
+
+    public PhysicalPerson getPhysical() {
+        return physical;
+    }
+
+    public void setPhysical(PhysicalPerson physical) {
+        this.physical = physical;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public LegalPerson getLegalPerson() {
+        return legalPerson;
+    }
+
+    public void setLegalPerson(LegalPerson legalPerson) {
+        this.legalPerson = legalPerson;
+    }
+
     public int getIdState() {
         return idState;
     }
@@ -42,13 +69,6 @@ public class State {
         this.idState = idState;
     }
 
-    /*public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }*/
     public String getNameState() {
         return nameState;
     }

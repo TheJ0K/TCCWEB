@@ -4,7 +4,7 @@
     Author     : Diogo Fistarol
 --%>
 <%@page import="Model.IdeaDeveloper"%>
-<%@page import="servelet.IdeaDev"%>
+<%@page import="servlet.IdeaDev"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -123,9 +123,9 @@
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
                     <a href=""><img src="<% out.print(post.getImageDeveloperIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
                     <div class="text-body-area" style="color: white;">Developer: <span>  </span></div><br><!--COMPANY NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span> <% out.print(post.getNumberDeveloperStars()); %> </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span> <% out.print(post.getNumberDeveloperStars()); %> </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span> <% out.print(post.getNumberDeveloperStars()); %> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Stars: <span> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Likes: <span>  </span></div><br>
+                    <div class="text-body-area" style="color: white;">NotLikes: <span>  </span></div><br>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->

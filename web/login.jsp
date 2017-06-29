@@ -21,7 +21,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body background="./images/business1.jpg">
+    <body style="background-image: url(./images/business1.jpg); background-attachment: fixed;">
         <nav class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
             <div class="container-fluid"><!--1-->
                 <!--"LOGO"-->
@@ -69,18 +69,6 @@
                             <input required="" type="password" class="form-control" placeholder="••••••••••" name="passwordLogin">
                         </div> <br>
 
-                        <div style="color: darkred; font-family: Charter BT; font-size: 20px; float: right;">
-                            <%
-                                try {
-                                    String msg = request.getAttribute("mensagem").toString();
-                                    if (msg != null) {
-                                        out.print("<p>" + msg + "</p>");
-                                    }
-                                } catch (Exception e) {
-
-                                }
-                            %>
-                        </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block active" name="submitLogin">Submit</button>
                         <div class="page-header-1415"> </div>
                         ${message}
@@ -106,18 +94,6 @@
                             <input required="" type="password" class="form-control" placeholder="••••••••••" name="passwordLogin">
                         </div> <br>
 
-                        <div style="color: darkred; font-family: Charter BT; font-size: 20px; float: right;">
-                            <%
-                                try {
-                                    String msg = request.getAttribute("mensagem").toString();
-                                    if (msg != null) {
-                                        out.print("<p>" + msg + "</p>");
-                                    }
-                                } catch (Exception e) {
-
-                                }
-                            %>
-                        </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block active" name="submitLogin">Submit</button>
                         <div class="page-header-1415"> </div>
                         ${message}
