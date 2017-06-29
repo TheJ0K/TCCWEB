@@ -6,6 +6,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -27,9 +28,9 @@ public class Company implements Serializable {
     @JoinColumn(name = "idlegal")
     private LegalPerson legalPerson;
 
-    @OneToMany
-    @JoinColumn(name = "idideacomp")
-    private IdeaCompany ideacomp;
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, targetEntity = IdeaCompany.class)
+    @JoinColumn(name = "ideacomp")
+    private List<IdeaCompany> ideacomp;
 
     public Company() {
     }
@@ -43,11 +44,11 @@ public class Company implements Serializable {
     }
     
     /*PODE DAR ERRO*/
-    public IdeaCompany getIdeaCompany() {
+    public List<IdeaCompany> getIdeaCompany() {
         return ideacomp;
     }
 
-    public void setIdeaCompany(IdeaCompany ideaCompany) {
+    public void setIdeaCompany(List<IdeaCompany> ideaCompany) {
         this.ideacomp = ideaCompany;
     }
     /*PODE DAR ERRO*/

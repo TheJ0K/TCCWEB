@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -26,9 +27,8 @@ public class Developer {
     @JoinColumn(name = "idpessoa")
     PhysicalPerson physicalPerson;
     
-    @OneToMany
-    @JoinColumn(name = "ididea")
-    IdeaDeveloper ideadeve;
+    @OneToMany(mappedBy = "developer", fetch = FetchType.EAGER, targetEntity = IdeaDeveloper.class)
+    private List<IdeaDeveloper> ideadeve;
 
     public Developer() {
     }
@@ -41,11 +41,11 @@ public class Developer {
         this.iddeveloper = iddeveloper;
     }
 
-    public IdeaDeveloper getIdeadeve() {
+    public List<IdeaDeveloper> getIdeadeve() {
         return ideadeve;
     }
 
-    public void setIdeadeve(IdeaDeveloper ideadeve) {
+    public void setIdeadeve(List<IdeaDeveloper> ideadeve) {
         this.ideadeve = ideadeve;
     }
     
