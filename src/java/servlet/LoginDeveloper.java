@@ -49,6 +49,8 @@ public class LoginDeveloper extends HttpServlet {
             }
 
             String page = "login.jsp";
+
+            
             String message = "<div class=\"alert alert-info alert-dismissable fade in\">\n"
                     + "                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
                     + "                <strong>Info!</strong> Complete all fields to log.\n"

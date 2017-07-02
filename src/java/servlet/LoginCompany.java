@@ -41,6 +41,15 @@ public class LoginCompany extends HttpServlet {
         String email = request.getParameter("emailLogin");
         String password = request.getParameter("passwordLogin");
 
+        String pass = Encryption.encrypt(password);
+
+        DAL dal = new DAL();
+        List<LegalPerson> legs = dal.getList("LegalPerson");
+
+        for (LegalPerson leg : legs) {
+            System.out.println(leg);
+        }
+
         DAL dal = new DAL();
         List<LegalPerson> legs = dal.getList("LegalPerson");
 
@@ -53,22 +62,22 @@ public class LoginCompany extends HttpServlet {
                 + "                <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
                 + "                <strong>Info!</strong> Complete all fields to log.\n"
                 + "            </div>";
-        
+
         String pass = Encryption.encrypt(password);
 
         for (LegalPerson leg : legs) {
             if (email.equals(leg.getEmail()) && pass.equals(leg.getPassword())) {
-                    page = "mainCompany.jsp";
-                    message = "";
+                page = "mainCompany.jsp";
+                message = "";
 
-                    HttpSession session = request.getSession();
-                    session.setAttribute("leg", leg);
+                HttpSession session = request.getSession();
+                session.setAttribute("leg", leg);
 
             }
         }
-        
+
         request.setAttribute("message", message);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher(page);
         rd.forward(request, response);
 
