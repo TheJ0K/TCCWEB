@@ -41,8 +41,6 @@ public class LoginCompany extends HttpServlet {
         String email = request.getParameter("emailLogin");
         String password = request.getParameter("passwordLogin");
 
-        String pass = Encryption.encrypt(password);
-
         DAL dal = new DAL();
         List<LegalPerson> legs = dal.getList("LegalPerson");
 
