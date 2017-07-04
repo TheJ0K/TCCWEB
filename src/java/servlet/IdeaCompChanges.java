@@ -5,8 +5,12 @@
  */
 package servlet;
 
+import DAL.DAL;
+import Model.IdeaCompany;
+import Model.IdeaDeveloper;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +33,34 @@ public class IdeaCompChanges extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IdeaCompChange</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IdeaCompChange at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String title = request.getParameter("titleChangesC");
+        String imageC = request.getParameter("imageNChangesC");
+        String titleN = request.getParameter("titleNChangesC");
+        String description = request.getParameter("descriptionCreateC");
+
+        try {
+            DAL dal = new DAL();
+
+            List<IdeaCompany> comps = dal.getList("IdeaCompany");
+
+            for (int i = 0; i < comps.size(); i++) {
+                if (title.equals("") || titleN.equals("") || imageC.equals("") || description.equals("")) {
+                    System.out.println("ABC");
+                } else if (title.equals(comps.get(i).getTitleCompanyIdea())) {
+                    IdeaCompany idea = new IdeaCompany();
+
+                    idea.setTitleCompanyIdea(titleN);
+                    idea.setImageCompanyIdea(imageC);
+                    idea.setDescriptionCompanyIdea(description);
+                    idea.setId_ideaCompany(comps.get(i).getId_ideaCompany());
+                    idea.setCompany(comps.get(i).getCompany());
+
+                    dal.update(idea);
+                }
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("mainCompany.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
         }
     }
 

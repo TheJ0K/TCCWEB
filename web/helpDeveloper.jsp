@@ -69,10 +69,7 @@
                             <li class="active"><a class="glyphicon glyphicon-info-sign" href="helpDeveloper.jsp"> Help</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a class="glyphicon glyphicon-cog" href="configurationsDev.jsp"> Configuration</a></li>
-                            <li role="separator" class="divider"></li>
-
-                            <li><a class="glyphicon glyphicon-log-out" href="#"> Logout</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="index.jsp"> Logout</a></li>
                             <li role="separator" class="divider"></li>
 
                         </ul>

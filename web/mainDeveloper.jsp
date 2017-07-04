@@ -9,6 +9,10 @@
 <%@page import="Model.Company"%>
 <%@page import="Model.Developer"%>
 
+<%@page import="DAL.DAL" %>
+
+<%@page import="java.util.List" %>
+
 <%@page import="servlet.LoginDeveloper"%>
 
 <%@page import="servlet.IdeaDev"%>
@@ -80,10 +84,7 @@
                             <li><a class="glyphicon glyphicon-info-sign" href="helpDeveloper.jsp"> Help</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a class="glyphicon glyphicon-cog" href="configurationsDev.jsp"> Configuration</a></li>
-                            <li role="separator" class="divider"></li>
-
-                            <li><a class="glyphicon glyphicon-log-out" href="#"> Logout</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="index.jsp"> Logout</a></li>
                             <li role="separator" class="divider"></li>
 
                         </ul>
@@ -171,11 +172,13 @@
 
     <!-- NEWs -->
     <div>
-        <form action="IdeaDevoloper" method="SET"><!--FORM NEWS IDEA-->
+        <form><!--FORM NEWS IDEA-->
 
             <div class="col-md-5 well" style="border-color: transparent;"><!--NEWS AREA DEVOLOPER 'BLACK'-->    
-                <%                    IdeaDev cria = new IdeaDev();
-                    for (IdeaDeveloper post : cria.getIdeaDevelopers()) {
+                <%
+                    DAL dal = new DAL();
+                    List<IdeaDeveloper> ideasd = dal.getList("IdeaDeveloper");
+                    for (IdeaDeveloper idea : ideasd) {
                 %>
 
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #0A0A0A; color: white;"> New Devoloper Idea! </div>
@@ -183,30 +186,30 @@
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
                     <center>
-                        <a href=""><img src="" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                        <a href=""><img src="<%out.println(idea.getImageDeveloperIdea());%>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
                     </center>
                     <div class="col-md-6">
-                        <div class="text-body-area" style="color: white;">Name:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                        <div class="text-body-area" style="color: white;">Lastname: <span>  </span></div><br>
-                        <div class="text-body-area" style="color: white;">Age: <span>  </span></div><br>
-                        <div class="text-body-area" style="color: white;">Email: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Name:<span> <%out.print(idea.getDeveloper().getPhysicalPerson().getName());%> </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Lastname: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getLastName());%> </span></div><br>
+                        <div class="text-body-area" style="color: white;">Age: <span> <%out.print(idea.getDeveloper().getAge());%> </span></div><br>
+                        <div class="text-body-area" style="color: white;">Email: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getEmail());%> </span></div><br>
                     </div>
                     <div class="col-md-6">
-                        <div class="text-body-area" style="color: white;">Landline Phone:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                        <div class="text-body-area" style="color: white;">Mobile Phone: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Landline Phone:<span> <%out.print(idea.getDeveloper().getPhysicalPerson().getPhone().getLandLine());%> </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Mobile Phone: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getPhone().getMobile());%> </span></div><br>
                     </div>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
                     <center>
-                        <h1 class="text-title-area" style="color: #0A0A0A;"></h1>
+                        <h1 class="text-title-area" style="color: #0A0A0A;"><%out.println(idea.getTitleDeveloperIdea());%></h1>
                     </center>
                 </div>
 
                 <div><!--TEXT DESCRIPTION AREA-->
 
                     <div class="col-md-12 well" style="background-color: #0A0A0A; color: white;">DESCRIPTION:
-                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"> <% out.print(post.getDescriptionDeveloperIdea()); %> </textarea>
+                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(idea.getDescriptionDeveloperIdea());%> </textarea>
                     </div>
 
                 </div>
@@ -223,42 +226,39 @@
         <form action="IdeaCompany" method="SET"><!--FORM NEWS IDEA-->
             <div class="col-md-5 well" style="border-color: transparent;"><!--NEWS AREA COMPANY BLACK--> 
                 <%
-                    IdeaComp create = new IdeaComp();
-                    for (IdeaCompany post : create.getIdeaCompanys()) {
-                %>    
+                    List<IdeaCompany> ideasc = dal.getList("IdeaCompany");
+                    for (IdeaCompany idea : ideasc) {
+                %>
 
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #0A0A0A; color: white;"> New Company Idea! </div>
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
                     <center>
-                        <a href=""><img src="<% out.print(post.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                        <a href=""><img src="<% out.print(idea.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
                     </center>
                     <div class="col-md-6">
-                        <div class="text-body-area" style="color: white;">Name:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                        <div class="text-body-area" style="color: white;">Lastname: <span>  </span></div><br>
-                        <div class="text-body-area" style="color: white;">Age: <span>  </span></div><br>
-                        <div class="text-body-area" style="color: white;">Email: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Name:<span> <%out.print(idea.getCompany().getLegalPerson().getName());%> </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Lastname: <span> <%out.print(idea.getCompany().getLegalPerson().getLastName());%> </span></div><br>
+                        <div class="text-body-area" style="color: white;">Company: <span> <%out.print(idea.getCompany().getNameCompany());%> </span></div><br>
+                        <div class="text-body-area" style="color: white;">Email: <span> <%out.print(idea.getCompany().getLegalPerson().getEmail());%> </span></div><br>
                     </div>
                     <div class="col-md-6">
-                        <div class="text-body-area" style="color: white;">Landline Phone:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                        <div class="text-body-area" style="color: white;">Mobile Phone: <span>  </span></div><br>
+                        <div class="text-body-area" style="color: white;">Landline Phone:<span> <%out.print(idea.getCompany().getLegalPerson().getPhone().getLandLine());%> </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Mobile Phone: <span> <%out.print(idea.getCompany().getLegalPerson().getPhone().getMobile());%> </span></div><br>
                     </div>
                 </div>
-
                 <div class="col-md-12"><!--TITLE AREA-->
-                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(post.getTitleCompanyIdea()); %></h1></center>
+                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(idea.getTitleCompanyIdea()); %></h1></center>
                 </div>
-
                 <div><!--TEXT DESCRIPTION AREA-->
-
                     <div class="col-md-12 well sidebar" style="background-color: #0A0A0A; color: white;">DESCRIPTION:
-                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(post.getDescriptionCompanyIdea()); %></textarea>
+                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(idea.getDescriptionCompanyIdea()); %></textarea>
                     </div>
                 </div>
                 <br>
                 <%
                     }
-                %>  
+                %>
 
             </div>
         </form>

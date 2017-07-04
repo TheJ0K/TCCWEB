@@ -5,8 +5,11 @@
  */
 package servlet;
 
+import DAL.DAL;
+import Model.IdeaCompany;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +32,26 @@ public class IdeaCompDelete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IdeaCompDelete</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IdeaCompDelete at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String title = request.getParameter("titleDeleteC");
+        String conftitle = request.getParameter("titleCDeleteC");
+        try {
+            DAL dal = new DAL();
+
+            List<IdeaCompany> comps = dal.getList("IdeaCompany");
+
+            for (int i = 0; i < comps.size(); i++) {
+                if (title.equals("") || conftitle.equals("")) {
+                    System.out.println("ABC");
+                } else if (title.equals(conftitle)) {
+                    if (title.equals(comps.get(i).getTitleCompanyIdea())) {
+                        dal.delete(comps.get(i));
+                    }
+                }
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("mainCompany.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

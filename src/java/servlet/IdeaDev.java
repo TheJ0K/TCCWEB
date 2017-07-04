@@ -5,14 +5,18 @@
  */
 package servlet;
 
+import DAL.DAL;
+import Model.IdeaDeveloper;
+import Model.PhysicalPerson;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Model.IdeaDeveloper;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,24 +24,27 @@ import Model.IdeaDeveloper;
  */
 public class IdeaDev extends HttpServlet {
 
-    List<IdeaDeveloper> lista = new ArrayList<IdeaDeveloper>();
-
-    public List<IdeaDeveloper> getIdeaDevelopers() {
-
-        lista.add(new IdeaDeveloper("./images/carousel3.jpg",
-                "Drop Idea",
-                "Descrição do projeto"));
-        
-        lista.add(new IdeaDeveloper("./images/carousel2.jpg",
-                "Drop",
-                "Descrição"));
-        
-        return lista;
-    }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        DAL dal = new DAL();
+        HttpSession ses = request.getSession();
 
+        PhysicalPerson physical = (PhysicalPerson) ses.getAttribute("phy");
+        physical.getDeveloper().getIddeveloper();
+
+        List<IdeaDeveloper> ideasdev = dal.getList("IdeaDeveloper");
+        IdeaDeveloper dev = new IdeaDeveloper();
+        for (int i = 0; i < ideasdev.size(); i++) {
+            if (Objects.equals(physical.getDeveloper().getIddeveloper(), ideasdev.get(i).getDeveloper().getIddeveloper())) {
+                dev.setDeveloper(ideasdev.get(i).getDeveloper());
+                HttpSession session = request.getSession();
+                session.setAttribute("dev", dev);
+
+            } else {
+            }
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("myIdeasD.jsp");
+        rd.forward(request, response);
     }
 
     @Override

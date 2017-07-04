@@ -4,6 +4,7 @@
     Author     : Diogo Fistarol
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -68,7 +69,7 @@
                         <div><!--NEW IMAGE-->
                             <div class="col-md-12 form-group">
                                 <label for="inputImageD1">Face Image</label>
-                                <input required="" type="file" class="form-control" placeholder="" name="imageFRegisterD">
+                                <input type="file" class="form-control" value="img" name="imageFRegisterD">
                             </div>
                         </div>
 

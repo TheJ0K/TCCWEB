@@ -3,6 +3,16 @@
     Created on : 25/06/2017, 14:06:47
     Author     : Diogo Fistarol
 --%>
+<%@page import="DAL.DAL" %>
+<%@page import="java.util.List" %>
+
+<%@page import="DAL.DAL" %>
+<%@page import="javax.servlet.*" %>
+
+<%@page import="Model.Developer" %>
+<%@page import="Model.PhysicalPerson" %>
+<%@page import="java.util.*" %>
+
 <%@page import="Model.IdeaDeveloper"%>
 <%@page import="servlet.IdeaDev"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -71,10 +81,7 @@
                             <li><a class="glyphicon glyphicon-info-sign" href="helpDeveloper.jsp"> Help</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a class="glyphicon glyphicon-cog" href="configurationsDev.jsp"> Configuration</a></li>
-                            <li role="separator" class="divider"></li>
-
-                            <li><a class="glyphicon glyphicon-log-out" href="#"> Logout</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="index.jsp"> Logout</a></li>
                             <li role="separator" class="divider"></li>
 
                         </ul>
@@ -111,31 +118,63 @@
 
         <div class="col-md-3"></div><!--COL SEPARATION-->
 
-        <form action="IdeaCompany" method="SET"><!--FORM NEWS IDEA-->
+        <form action="IdeaDeveloper" method="GET"><!--FORM NEWS IDEA-->
             <div class="col-md-6 well" style="border-color: #0A0A0A;"><!--NEWS AREA COMPANY BLACK--> 
                 <%
-                    IdeaDev create = new IdeaDev();
-                    for (IdeaDeveloper post : create.getIdeaDevelopers()) {
-                %>    
+                    DAL dal = new DAL();
+                    PhysicalPerson physical = (PhysicalPerson) request.getSession().getAttribute("phy");
+                    physical.getDeveloper().getIddeveloper();
+
+                    List<IdeaDeveloper> ideasdev = dal.getList("IdeaDeveloper");
+                    IdeaDeveloper dev = new IdeaDeveloper();
+                    for (int i = 0; i < ideasdev.size(); i++) {
+                        if (Objects.equals(physical.getDeveloper().getIddeveloper(), ideasdev.get(i).getDeveloper().getIddeveloper())) {
+                            dev.setDeveloper(ideasdev.get(i).getDeveloper());
+                %>  
 
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #0A0A0A; color: white;"> New Company Idea! </div>
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
-                    <a href=""><img src="<% out.print(post.getImageDeveloperIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
-                    <div class="text-body-area" style="color: white;">Developer: <span>  </span></div><br><!--COMPANY NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span> </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span>  </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span>  </span></div><br>
+                    <center>
+                        <a href=""><img src="<% ideasdev.get(i).getImageDeveloperIdea(); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                    </center>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Name:
+                            <span>
+                                ${phy.name}
+                            </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Lastname:
+                            <span>
+                                ${phy.lastName}
+                            </span></div><br>
+                        <div class="text-body-area" style="color: white;">Age:
+                            <span>
+                                ${phy.developer.age}
+                            </span></div><br>
+                        <div class="text-body-area" style="color: white;">Email:
+                            <span>
+                                ${phy.email}
+                            </span></div><br>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-body-area" style="color: white;">Landline Phone:
+                            <span>
+                                ${phy.phone.landLine}
+                            </span></div><br><!--DEVOLOPER NAME-->
+                        <div class="text-body-area" style="color: white;">Mobile Phone:
+                            <span>
+                                ${phy.phone.mobile}
+                            </span></div><br>
+                    </div>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
-                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(post.getTitleDeveloperIdea()); %></h1></center>
+                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(ideasdev.get(i).getTitleDeveloperIdea()); %></h1></center>
                 </div>
 
                 <div><!--TEXT DESCRIPTION AREA-->
-
                     <div class="col-md-12 well sidebar" style="background-color: #0A0A0A; color: white;">DESCRIPTION:
-                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(post.getDescriptionDeveloperIdea()); %></textarea>
+                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(ideasdev.get(i).getDescriptionDeveloperIdea()); %></textarea>
                     </div>
                 </div>
 
@@ -149,8 +188,10 @@
                     </center>
                 </div><br>
                 <%
+
+                        }
                     }
-                %>  
+                %>
 
             </div>
         </form>

@@ -13,12 +13,17 @@ import Model.LegalPerson;
 import Model.Phone;
 import Model.Photo;
 import Model.State;
+import java.io.File;
 import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -52,7 +57,6 @@ public class RegisterCompany extends HttpServlet {
                     || passwordC.equals("") || passwordConfirmC.equals("")) {
 
             } else if (passwordC.equals(passwordConfirmC)) {
-
                 DAL dal = new DAL();
 
                 Company comp = new Company();
@@ -91,15 +95,15 @@ public class RegisterCompany extends HttpServlet {
                 dal.add(state);
                 dal.add(legal);
                 dal.add(comp);
-                
+
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
-            } 
+            }
 
         } catch (Exception ex) {
-            
+
             System.out.println("Erro: " + ex.getMessage() + "\n" + ex.getLocalizedMessage());
-            
+
             request.setAttribute("message", "Erro ao cadastrar usuário!");
             request.setAttribute("css_class", "erro");
 

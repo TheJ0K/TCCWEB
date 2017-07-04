@@ -6,7 +6,6 @@
 package servlet;
 
 import DAL.DAL;
-import Model.Company;
 import Model.Encryption;
 import Model.LegalPerson;
 import java.io.IOException;
@@ -43,14 +42,7 @@ public class LoginCompany extends HttpServlet {
 
         DAL dal = new DAL();
         List<LegalPerson> legs = dal.getList("LegalPerson");
-
-        for (LegalPerson leg : legs) {
-            System.out.println(leg);
-        }
-
-        DAL dal = new DAL();
-        List<LegalPerson> legs = dal.getList("LegalPerson");
-
+        
         for (LegalPerson leg : legs) {
             System.out.println(leg);
         }
@@ -70,7 +62,7 @@ public class LoginCompany extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("leg", leg);
-
+                
             }
         }
 

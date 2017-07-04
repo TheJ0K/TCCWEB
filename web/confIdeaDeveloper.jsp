@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Configure Ideas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -141,7 +141,7 @@
 
                 <!--CREATE COMPANY AREA-->
                 <div class="tab-pane fade" id="changes">
-                    <form action="ideaDevChanges" method="GET">
+                    <form action="IdeaDevChange" method="GET">
                         <center>
                             <div class="page-header-1415 text-title" style="margin-top: 5px;">DEVELOPER | 
                                 <small>Changes Your Idea</small> 
@@ -184,19 +184,6 @@
                                 <textarea class="form-control" name="descriptionCreateD" style="height: 200px;"> </textarea><!--NEW DESCRIPTION-->
                             </div>
                         </div>
-
-                        <div><!--PASSWORD-->
-                            <div class="col-md-6 form-group">
-                                <label for="inputPasswordN">Your Password</label>
-                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordChangesD"><!--PASSWORD FOR CONFIRMATION-->
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="inputConfirmPasswordN">Password Confirm</label>
-                                <input type="password" class="form-control" placeholder="••••••••••" name="passwordConfirmChangesD"><!--CONFIRM PASSWORD-->
-                            </div>
-                        </div>
-                        <br>
-
                         <div><!--BUTTON-->
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                         </div>
@@ -205,57 +192,35 @@
 
                 <!--CREATE COMPANY AREA-->
                 <div class="tab-pane fade" id="delete">
-                    <form action="ideaDevDelet" method="GET">
+                    <form action="IdeaDevDelete" method="GET">
                         <center>
                             <div class="page-header-1415 text-title" style="margin-top: 5px;">DEVELOPER | 
                                 <small>Delete Your Idea</small> 
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: right;"></span>
                             </div>
                         </center>
-
                         <div class="alert alert-info alert-dismissable fade in">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>Info!</strong> Complete all fields to delete idea.
                         </div>
-
                         <div><!--TITLE CHANGE-->
                             <div class="col-md-12 form-group"><!--D = DELETE | C = CONFIRM or | D = DEVELOPER-->
                                 <label for="inputTitleD">Title to Delete</label>
                                 <input type="text" class="form-control" placeholder="your idea title" name="titleDeleteD">
                             </div>
-
                             <br>
-
                             <div class="col-md-12 form-group"><!--D = DELETE-->
                                 <label for="inputConfirmTitleD">Confirm Title to Delete</label>
                                 <input type="text" class="form-control" placeholder="your idea title" name="titleCDeleteD">
-
                                 <h1 class="col-md-12 page-header-1415"></h1>
-
                             </div>
-                        </div>
-
-                        <div><!--PASSWORD-->
-                            <div class="col-md-6 form-group">
-                                <label for="inputPasswordD">Your Password</label>
-                                <input type="password" class="form-control" placeholder="•••••••••" name="passwordCreateD">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="inputConfirmPasswordD">Password Confirm</label>
-                                <input type="password" class="form-control" placeholder="••••••••••" name="passwordConfirmRegisterD">
-                            </div>
-                        </div>
-                        <br>
-
+                        </div
                         <div><!--BUTTON-->
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                         </div>
                     </form>
-
                 </div>
-
             </div>
         </div>
-
     </body>
 </html>

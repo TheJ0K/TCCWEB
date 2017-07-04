@@ -43,7 +43,6 @@ public class Company implements Serializable {
         this.legalPerson = legalPerson;
     }
 
-    /*PODE DAR ERRO*/
     public List<IdeaCompany> getIdeaCompany() {
         return ideacomp;
     }
@@ -51,8 +50,6 @@ public class Company implements Serializable {
     public void setIdeaCompany(List<IdeaCompany> ideaCompany) {
         this.ideacomp = ideaCompany;
     }
-
-    /*PODE DAR ERRO*/
 
     public String getNameCompany() {
         return nameCompany;

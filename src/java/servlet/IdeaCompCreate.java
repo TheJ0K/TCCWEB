@@ -43,7 +43,7 @@ public class IdeaCompCreate extends HttpServlet {
             } else {
                 DAL dal = new DAL();
 
-                LegalPerson legal = new LegalPerson();
+                LegalPerson legal;
                 legal = (LegalPerson) request.getSession().getAttribute("leg");
 
                 IdeaCompany idea = new IdeaCompany();

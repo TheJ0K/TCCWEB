@@ -3,6 +3,9 @@
     Created on : 20/06/2017, 23:50:10
     Author     : Diogo Fistarol
 --%>
+<%@page import="DAL.DAL" %>
+
+<%@page import="java.util.List" %>
 
 <%@page import="Model.IdeaDeveloper"%>
 <%@page import="servlet.IdeaDev"%>
@@ -72,10 +75,7 @@
                             <li><a class="glyphicon glyphicon-info-sign" href="helpCompany.jsp"> Help</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a class="glyphicon glyphicon-cog" href="configurationsComp.jsp"> Configuration</a></li>
-                            <li role="separator" class="divider"></li>
-
-                            <li><a class="glyphicon glyphicon-log-out" href="#"> Logout</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="index.jsp"> Logout</a></li>
                             <li role="separator" class="divider"></li>
 
                         </ul>
@@ -102,40 +102,39 @@
 
         <div class="col-md-3"></div><!--COL SEPARATION-->
 
-        <form action="IdeaDevoloper" method="SET"><!--FORM NEWS IDEA-->
+        <form action="IdeaCompany" method="SET"><!--FORM NEWS IDEA-->
             <div class="col-md-6 well" style="border-color: #202020;"><!--NEWS AREA DEVOLOPER 'BLACK'-->    
                 <%
-                    IdeaDev cria = new IdeaDev();
-                    for (IdeaDeveloper post : cria.getIdeaDevelopers()) {
+                    DAL dal = new DAL();
+                    List<IdeaDeveloper> ideasd = dal.getList("IdeaDeveloper");
+                    for (IdeaDeveloper idea : ideasd) {
                 %>
 
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #202020; color: white;"> New Devoloper Idea! </div>
 
 
                 <div class="well col-md-12" style="background-color: #202020;"><!--IMAGES AREA-->
-                    <a href=""><img src="<% out.print(post.getImageDeveloperIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
-                    <div class="text-body-area" style="color: white;">Developer:<span>  </span></div><br><!--DEVOLOPER NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span> </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span> </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span> </span></div><br>
+                    <a href=""><img src="<% out.print(idea.getImageDeveloperIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                    <div class="text-body-area" style="color: white;">Developer: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getName());%> </span></div><br><!--COMPANY NAME-->
+                    <div class="text-body-area" style="color: white;">Landline Phone: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getPhone().getLandLine());%> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Mobile Phone: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getPhone().getMobile());%> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Email: <span> <%out.print(idea.getDeveloper().getPhysicalPerson().getEmail());%> </span></div><br>
 
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
                     <center>
-                        <h1 class="text-title-area" style="color: #202020;"><% out.print(post.getTitleDeveloperIdea()); %></h1>
+                        <h1 class="text-title-area" style="color: #202020;"><% out.print(idea.getTitleDeveloperIdea()); %></h1>
                     </center>
                 </div>
 
                 <div><!--TEXT DESCRIPTION AREA-->
 
                     <div class="col-md-12 well" style="background-color: #202020; color: white;">DESCRIPTION:
-                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"> <% out.print(post.getDescriptionDeveloperIdea()); %> </textarea>
+                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"> <% out.print(idea.getDescriptionDeveloperIdea()); %> </textarea>
                     </div>
 
                 </div>
-
-
 
                 <div class="page-header-black"><!--BUTTONS-->
                     <center>

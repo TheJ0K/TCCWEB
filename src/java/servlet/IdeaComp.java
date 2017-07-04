@@ -5,14 +5,14 @@
  */
 package servlet;
 
+import DAL.DAL;
 import Model.IdeaCompany;
+import Model.LegalPerson;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 /**
  *
@@ -20,38 +20,41 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IdeaComp extends HttpServlet {
 
-        List<IdeaCompany> lista = new ArrayList<IdeaCompany>();
-
-    public List<IdeaCompany> getIdeaCompanys() {
-
-        lista.add(new IdeaCompany("./images/carousel3.jpg",
-                "Inova",
-                "Inovando o seculo XXI"));
-        
-        lista.add(new IdeaCompany("./images/carousel2.jpg",
-                "Praric",
-                "Praticando no seculo XXI"));
-        
-        return lista;
-    }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
+        DAL dal = new DAL();
+        HttpSession ses = request.getSession();
+
+        LegalPerson legal = (LegalPerson) ses.getAttribute("leg");
+        legal.getCompany().getIdCompany();
+
+        List<IdeaCompany> ideascomp = dal.getList("IdeaCompany");
+        IdeaCompany comp = new IdeaCompany();
+        for (int i = 0; i < ideascomp.size(); i++) {
+            if (Objects.equals(legal.getCompany().getIdCompany(), ideascomp.get(i).getCompany().getIdCompany())) {
+                comp.setCompany(ideascomp.get(i).getCompany());
+                HttpSession session = request.getSession();
+                session.setAttribute("comp", comp);
+
+            } else {
+            }
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("myIdeasC.jsp");
+        rd.forward(request, response);
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

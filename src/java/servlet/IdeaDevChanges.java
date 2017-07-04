@@ -5,8 +5,11 @@
  */
 package servlet;
 
+import DAL.DAL;
+import Model.IdeaDeveloper;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +32,34 @@ public class IdeaDevChanges extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IdeaDevChange</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IdeaDevChange at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String title = request.getParameter("titleChangesD");
+        String imageC = request.getParameter("imageNChangesD");
+        String titleN = request.getParameter("titleNChangesD");
+        String description = request.getParameter("descriptionCreateD");
+
+        try {
+            DAL dal = new DAL();
+
+            List<IdeaDeveloper> devs = dal.getList("IdeaDeveloper");
+
+            for (int i = 0; i < devs.size(); i++) {
+                if (title.equals("") || titleN.equals("") || imageC.equals("") || description.equals("")) {
+                    System.out.println("ABC");
+                } else if (title.equals(devs.get(i).getTitleDeveloperIdea())) {
+                    IdeaDeveloper idea = new IdeaDeveloper();
+
+                    idea.setTitleDeveloperIdea(titleN);
+                    idea.setImageDeveloperIdea(imageC);
+                    idea.setDescriptionDeveloperIdea(description);
+                    idea.setId_ideaDeveloper(devs.get(i).getId_ideaDeveloper());
+                    idea.setDeveloper(devs.get(i).getDeveloper());
+
+                    dal.update(idea);
+                }
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
         }
     }
 

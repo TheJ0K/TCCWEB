@@ -49,28 +49,8 @@
         <servlet-class>servlet.IdeaDevDelete</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteCompany</servlet-name>
-        <servlet-class>servlet.DeleteCompany</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteDeveloper</servlet-name>
-        <servlet-class>servlet.DeleteDeveloper</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ChangeCompany</servlet-name>
         <servlet-class>servlet.ChangeCompany</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangeDeveloper</servlet-name>
-        <servlet-class>servlet.ChangeDeveloper</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AccountCompany</servlet-name>
-        <servlet-class>servlet.AccountCompany</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AccountDeveloper</servlet-name>
-        <servlet-class>servlet.AccountDeveloper</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterDeveloper</servlet-name>
@@ -121,28 +101,8 @@
         <url-pattern>/IdeaDevDelete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteCompany</servlet-name>
-        <url-pattern>/DeleteCompany</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteDeveloper</servlet-name>
-        <url-pattern>/DeleteDeveloper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ChangeCompany</servlet-name>
         <url-pattern>/ChangeCompany</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangeDeveloper</servlet-name>
-        <url-pattern>/ChangeDeveloper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccountCompany</servlet-name>
-        <url-pattern>/AccountCompany</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AccountDeveloper</servlet-name>
-        <url-pattern>/AccountDeveloper</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

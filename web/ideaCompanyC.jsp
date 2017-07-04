@@ -4,6 +4,8 @@
     Author     : Diogo Fistarol
 --%>
 
+<%@page import="DAL.DAL" %>
+<%@page import="java.util.*" %>
 <%@page import="Model.IdeaCompany"%>
 <%@page import="servlet.IdeaComp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -72,10 +74,7 @@
                             <li><a class="glyphicon glyphicon-info-sign" href="helpCompany.jsp"> Help</a></li>
                             <li role="separator" class="divider"></li>
 
-                            <li><a class="glyphicon glyphicon-cog" href="configurationsComp.jsp"> Configuration</a></li>
-                            <li role="separator" class="divider"></li>
-
-                            <li><a class="glyphicon glyphicon-log-out" href="#"> Logout</a></li>
+                            <li><a class="glyphicon glyphicon-log-out" href="index.jsp"> Logout</a></li>
                             <li role="separator" class="divider"></li>
 
                         </ul>
@@ -103,28 +102,29 @@
         <form action="IdeaCompany" method="SET"><!--FORM NEWS IDEA-->
             <div class="col-md-6 well" style="border-color: #0A0A0A;"><!--NEWS AREA COMPANY BLACK--> 
                 <%
-                    IdeaComp create = new IdeaComp();
-                    for (IdeaCompany post : create.getIdeaCompanys()) {
-                %>    
+                    DAL dal = new DAL();
+                    List<IdeaCompany> ideasc = dal.getList("IdeaCompany");
+                        for (IdeaCompany idea : ideasc) {
+                %>
 
                 <div class="well col-md-12 glyphicon glyphicon-star-empty" style="background: #0A0A0A; color: white;"> New Company Idea! </div>
 
                 <div class="well col-md-12" style="background-color: #0A0A0A;"><!--IMAGES AREA-->
-                    <a href=""><img src="<% out.print(post.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
-                    <div class="text-body-area" style="color: white;">Company: <span>  </span></div><br><!--COMPANY NAME-->
-                    <div class="text-body-area" style="color: white;">Stars: <span> </span></div><br>
-                    <div class="text-body-area" style="color: white;">Likes: <span> </span></div><br>
-                    <div class="text-body-area" style="color: white;">NotLikes: <span> </span></div><br>
+                    <a href=""><img src="<% out.print(idea.getImageCompanyIdea()); %>" class="img-rounded" alt="Idea - carousel3" style="width:100%;"></a>
+                    <div class="text-body-area" style="color: white;">Company: <span> <%out.print(idea.getCompany().getNameCompany());%> </span></div><br><!--COMPANY NAME-->
+                    <div class="text-body-area" style="color: white;">Landline Phone: <span> <%out.print(idea.getCompany().getLegalPerson().getPhone().getLandLine());%> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Mobile Phone:<span> <%out.print(idea.getCompany().getLegalPerson().getPhone().getMobile());%> </span></div><br>
+                    <div class="text-body-area" style="color: white;">Email: <span> <%out.print(idea.getCompany().getLegalPerson().getEmail());%> </span></div><br>
                 </div>
 
                 <div class="col-md-12"><!--TITLE AREA-->
-                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(post.getTitleCompanyIdea()); %></h1></center>
+                    <center><h1 class="text-title-area" style="color: #0A0A0A;"><% out.print(idea.getTitleCompanyIdea()); %></h1></center>
                 </div>
 
                 <div><!--TEXT DESCRIPTION AREA-->
 
                     <div class="col-md-12 well sidebar" style="background-color: #0A0A0A; color: white;">DESCRIPTION:
-                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(post.getDescriptionCompanyIdea()); %></textarea>
+                        <textarea class="form-control" style="height: 200px;" rows="3" disabled="disabled"><% out.print(idea.getDescriptionCompanyIdea()); %></textarea>
                     </div>
                 </div>
 

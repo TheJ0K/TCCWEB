@@ -5,8 +5,11 @@
  */
 package servlet;
 
+import DAL.DAL;
+import Model.IdeaDeveloper;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,18 +32,26 @@ public class IdeaDevDelete extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IdeaDevDelete</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IdeaDevDelete at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String title = request.getParameter("titleDeleteD");
+        String conftitle = request.getParameter("titleCDeleteD");
+        try {
+            DAL dal = new DAL();
+
+            List<IdeaDeveloper> devs = dal.getList("IdeaDeveloper");
+
+            for (int i = 0; i < devs.size(); i++) {
+                if (title.equals("") || conftitle.equals("")) {
+                    System.out.println("ABC");
+                } else if (title.equals(conftitle)) {
+                    if (title.equals(devs.get(i).getTitleDeveloperIdea())) {
+                        dal.delete(devs.get(i));
+                    }
+                }
+            }
+            RequestDispatcher rd = request.getRequestDispatcher("mainDeveloper.jsp");
+            rd.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
